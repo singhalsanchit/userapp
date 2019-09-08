@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Secret Codes</h1>
+<table id="example" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Secret Code</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @secret_codes.each do |secret_code| %>
+      <tr>
+        <% user = secret_code.user%>
+        <%if user.present?%>
+          <td><%= secret_code.user.email %></td>
+        <%else%>
+          <td>N/A</td>
+        <%end%>
+        <td><%= secret_code.code %></td>
+        <td><%= link_to 'Show', secret_code %></td>
+        <td><%= link_to 'Edit', edit_secret_code_path(secret_code) %></td>
+        <td><%= link_to 'Destroy', secret_code, method: :delete, data: { confirm: 'Are you sure you want to delete it?' } %></td>
+      </tr>
+      <%end%>
+  </tbody>
+</table>
+
+<%= link_to 'New Secret Code', new_secret_code_path, method: :get %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
